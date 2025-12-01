@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>KYCC — Team Registration</title>
+  <link rel="stylesheet" href="../scorecard/score.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="brand">
+        <h1>KYCC Tournament</h1>
+      </div>
+      <div class="nav">
+         <a href="../registration/registration.html">Register</a>
+        <a href="../teamfix/fixtures.html">Fixtures</a>
+        <a href="../scorecard/score.html">Tournament</a>
+        <a href="../admin/admin.html">Admin</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Team Registration</h2>
+      <form id="teamForm" class="form-row">
+        <input class="input-full" name="teamName" placeholder="Team name" required>
+        <input name="captainName" placeholder="Captain name">
+        <input name="phone" placeholder="Phone number">
+        <button class="btn" type="submit">Register Team</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h3>Registered Teams</h3>
+      <ul id="teamList" class="list"></ul>
+    </div>
+
+  </div>
+
+  <script src="../jsfile/process.js"></script>
+</body>
+</html>

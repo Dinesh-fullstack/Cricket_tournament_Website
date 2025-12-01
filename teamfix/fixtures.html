@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>KYCC — Fixtures</title>
+  <link rel="stylesheet" href="../scorecard/score.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="brand"><h1>KYCC Tournament</h1></div>
+      <div class="nav">
+            <a href="../registration/registration.html">Register</a>
+        <a href="../teamfix/fixtures.html">Fixtures</a>
+        <a href="../scorecard/score.html">Tournament</a>
+        <a href="../admin/admin.html">Admin</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Fixture Controls</h2>
+      <div class="form-row">
+        <label>Start Date</label>
+        <input type="date" id="startDate">
+        <label>First Slot</label>
+        <input type="time" id="firstSlot" value="17:00">
+        <label>Second Slot</label>
+        <input type="time" id="secondSlot" value="20:00">
+        <label>Interval Days</label>
+        <input type="number" id="intervalDays" min="0" value="0">
+        <label>Grounds (comma)</label>
+        <input type="text" id="grounds" placeholder="Main Ground, Ground B">
+      </div>
+      <div style="margin-top:12px;display:flex;gap:8px">
+        <button id="generateRR" class="btn">Generate Round-Robin</button>
+        <button id="generateKO" class="btn">Generate Knockout</button>
+        <button id="exportCSV" class="btn-alt">Export CSV</button>
+        <button id="printSchedule" class="btn-alt">Print</button>
+      </div>
+    </div>
+
+    <div class="card schedule-table">
+      <h3>Fixture Preview</h3>
+      <table id="scheduleTable" class="table">
+        <thead><tr><th>#</th><th>Date</th><th>Time</th><th>Team A</th><th>Team B</th><th>Ground</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>Knockout Bracket</h3>
+      <div id="bracketContainer"></div>
+    </div>
+
+  </div>
+  <script src="../jsfile/process.js"></script>
+</body>
+</html>

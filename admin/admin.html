@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>KYCC — Admin</title>
+  <link rel="stylesheet" href="./admin.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="brand"><h1>KYCC Admin</h1></div>
+      <div class="nav">
+        <a href="../registration/registration.html">Register</a>
+        <a href="../teamfix/fixtures.html">Fixtures</a>
+        <a href="../scorecard/score.html">Tournament</a>
+        <a href="../admin/admin.html">Admin</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Teams</h3>
+      <ul id="adminTeams" class="list"></ul>
+      <div style="margin-top:10px;display:flex;gap:8px">
+        <button id="seedShuffle" class="btn-alt">Shuffle Seed Order</button>
+        <button id="clearAll" class="btn">Clear All Data</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Matches</h3>
+      <ul id="adminMatches" class="list"></ul>
+    </div>
+  </div>
+  <script src="../jsfile/process.js"></script>
+</body>
+</html>

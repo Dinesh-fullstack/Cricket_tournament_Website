@@ -1,0 +1,147 @@
+  Shared styles for tournament system
+  :root{
+    --bg:#0f1724;
+    --card:#0b1220; 
+    --accent:#00b4ff; 
+    --accent2:#ff7a00; 
+    --muted:#9aa4b2;
+  }
+  *{
+    box-sizing:border-box
+  }
+  body{
+    margin:0;
+    font-family:Inter,Arial,Helvetica,sans-serif; 
+    background:linear-gradient(180deg,#071021 0%, #0b1220 100%);
+    color:#e6f0fb;
+    min-height:100vh;
+    padding:28px;
+  }
+  .container{
+    max-width:1100px; 
+    margin:0 auto
+  }
+
+  /* header nav simple */
+  .header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:18px
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:12px
+  }
+  .brand h1{
+    font-size:20px;
+    margin:0;
+    color:var(--accent)
+  }
+  .nav a{
+    color:var(--muted);
+    text-decoration:none;
+    margin-left:12px;
+    padding:8px 10px;
+    border-radius:8px
+  }
+  .nav a:hover{
+    background:#071a2a;
+    color:#fff
+  }
+
+  /* card */
+  .card{
+    background:var(--card);
+    padding:18px;
+    border-radius:12px;
+    box-shadow:0 8px 30px rgba(2,6,23,0.6);
+    margin-bottom:18px
+  }
+
+  /* forms */
+  .form-row{
+    display:flex;
+    gap:10px;
+    align-items:center;
+    flex-wrap:wrap
+  }
+  .form-row input, .form-row select {
+    padding:10px;
+    border-radius:8px;
+    border:1px solid #112233;
+    background:#06101a;
+    color:#e6f0fb
+  }
+  .input-full{
+    width:100%
+  }
+  .btn{
+    background:var(--accent);
+    color:#00111a;
+    padding:10px 14px;
+    border-radius:8px;
+    border:none;
+    cursor:pointer
+  }
+  .btn-alt{
+    background:transparent;
+    color:var(--accent);
+    border:1px solid rgba(0,180,255,0.12)
+  }
+  .small{
+    padding:8px 10px;
+    font-size:14px
+  }
+
+  /* lists & tables */
+  .list{list-style:none;padding:0;margin:0}
+  .list li{padding:10px;border-radius:8px;background:linear-gradient(90deg,#071827, #08121a);margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+  .table{width:100%;border-collapse:collapse}
+  .table th, .table td{
+    padding:10px;
+    border-bottom:1px solid rgba(255,255,255,0.03);
+    text-align:left
+  }
+  .table th{
+    color:var(--muted)
+  }
+
+  /* fixtures table */
+  .schedule-table{
+    width:100%;
+    border-radius:8px;
+    overflow:auto;
+    background:linear-gradient(180deg,#061626, #071526);
+    padding:8px}
+
+  /* bracket simple */
+  .bracket{
+    display:flex;
+    gap:12px;
+    overflow:auto;
+    padding:8px
+  }
+  .bracket-round
+  {
+    min-width:220px;
+    background:#061827;
+    padding:10px;
+    border-radius:8px
+  }
+  .bracket-match{
+    padding:8px; 
+    margin-bottom:8px;
+    border-radius:6px;
+    background:linear-gradient(180deg,#081a22,#06131a);
+  }
+
+  /* responsive */
+  @media (max-width:900px){
+    .form-row{flex-direction:column}
+    .header{flex-direction:column;
+      align-items:flex-start;
+      gap:10px}
+  }
+
