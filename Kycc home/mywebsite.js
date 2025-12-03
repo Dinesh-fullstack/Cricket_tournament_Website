@@ -4,10 +4,12 @@
 let virat=document.querySelector('.playcard img');
 virat.addEventListener('mouseover',function(){
     virat.style.transform="scale(1.1)";
+    virat.style.boxShadow = "2px 3px 35px orange"
     virat.style.transition="all 0.3s ease-in-out";
 });
 virat.addEventListener('mouseout',function(){
     virat.style.transform="scale(1)";
+    virat.style.boxShadow = "2px 3px 7px black";
 });
 
 let kohli=document.querySelector('.playcard');
@@ -36,10 +38,12 @@ Viratbutton.addEventListener('dblclick',function(){
 let Rohit = document.querySelector('.playcard img#Rohit');
 Rohit.addEventListener('mouseover', function() {
     Rohit.style.transform = "scale(1.1)";
+    Rohit.style.boxShadow = "2px 3px 35px orange";
     Rohit.style.transition = "all 0.3s ease-in-out";
 });
 Rohit.addEventListener('mouseout', function() {
     Rohit.style.transform = "scale(1)";
+    Rohit.style.boxShadow = "2px 3px 7px black";
 })
 
 let Rohitbutton = document.getElementById('Rohitbutton');
@@ -65,10 +69,12 @@ Rohitbutton.addEventListener('dblclick', function() {
 let Dhoni = document.querySelector('.playcard img#Dhoni');
 Dhoni.addEventListener('mouseover', function() {
     Dhoni.style.transform = "scale(1.1)";
+    Dhoni.style.boxShadow = "2px 3px 35px orange";
     Dhoni.style.transition = "all 0.3s ease-in-out";
 });
 Dhoni.addEventListener('mouseout', function() {
     Dhoni.style.transform = "scale(1)";
+    Dhoni.style.boxShadow = "2px 3px 7px black";
 })
 
 
@@ -98,10 +104,12 @@ Dhonibutton.addEventListener('dblclick', function() {
 let Jadeja = document.querySelector('.playcard img#Jadeja');
 Jadeja.addEventListener('mouseover', function() {
     Jadeja.style.transform = "scale(1.1)";
+    Jadeja.style.boxShadow = "2px 3px 35px orange";
     Jadeja.style.transition = "all 0.3s ease-in-out";
 });
 Jadeja.addEventListener('mouseout', function() {
     Jadeja.style.transform = "scale(1)";
+    Jadeja.style.boxShadow = "2px 3px 7px black";
 })
 let Jadejabutton = document.getElementById('Jadejabutton');
 let playcard4 = document.querySelector('#playcard4');
@@ -126,10 +134,12 @@ Jadejabutton.addEventListener('dblclick', function() {
 let Bumrah = document.querySelector('.playcard img#Bumrah');
 Bumrah.addEventListener('mouseover', function() {
     Bumrah.style.transform = "scale(1.1)";
+    Bumrah.style.boxShadow = "2px 3px 35px orange";
     Bumrah.style.transition = "all 0.3s ease-in-out";
 });
 Bumrah.addEventListener('mouseout', function() {
     Bumrah.style.transform = "scale(1)";
+    Bumrah.style.boxShadow = "2px 3px 7px black";
 })
 let Bumrahbutton = document.getElementById('Bumrahbutton');
 let playcard5 = document.querySelector('#playcard5');
@@ -154,10 +164,12 @@ Bumrahbutton.addEventListener('dblclick', function() {
 let Shami = document.querySelector('.playcard img#Shami');
 Shami.addEventListener('mouseover', function() {
     Shami.style.transform = "scale(1.1)";
+    Shami.style.boxShadow = "2px 3px 35px orange";
     Shami.style.transition = "all 0.3s ease-in-out";
 });
 Shami.addEventListener('mouseout', function() {
     Shami.style.transform = "scale(1)";
+    Shami.style.boxShadow = "2px 3px 7px black";
 })
 
 let Shamibutton = document.getElementById('Shamibutton');
@@ -183,10 +195,12 @@ Shamibutton.addEventListener('dblclick', function() {
 let Ruturaj = document.querySelector('.playcard img#Rutu');
 Ruturaj.addEventListener('mouseover', function() {
     Ruturaj.style.transform = "scale(1.1)";
+    Ruturaj.style.boxShadow = "2px 3px 35px orange";
     Ruturaj.style.transition = "all 0.3s ease-in-out";
 });
 Ruturaj.addEventListener('mouseout', function() {
     Ruturaj.style.transform = "scale(1)";
+    Ruturaj.style.boxShadow = "2px 3px 7px black";
 })
 let Rutubutton = document.getElementById('Rutubutton');
 let playcard7 = document.querySelector('#playcard7');
@@ -211,10 +225,12 @@ Rutubutton.addEventListener('dblclick', function() {
 let Suryakumar = document.querySelector('.playcard img#Suryakumar');    
 Suryakumar.addEventListener('mouseover', function() {
     Suryakumar.style.transform = "scale(1.1)";
+    Suryakumar.style.boxShadow = "2px 3px 35px orange";
     Suryakumar.style.transition = "all 0.3s ease-in-out";
 });
 Suryakumar.addEventListener('mouseout', function() {
     Suryakumar.style.transform = "scale(1)";
+    Suryakumar.style.boxShadow = "2px 3px 7px black";
 })
 
 let Suryabutton = document.getElementById('Suryakumarbutton');
@@ -239,10 +255,12 @@ Suryabutton.addEventListener('dblclick', function() {
 let Hardik = document.querySelector('.playcard img#Hardik');
 Hardik.addEventListener('mouseover', function() {
     Hardik.style.transform = "scale(1.1)";
+    Hardik.style.boxShadow = "2px 3px 35px orange";
     Hardik.style.transition = "all 0.3s ease-in-out";
 });
 Hardik.addEventListener('mouseout', function() {
     Hardik.style.transform = "scale(1)";
+    Hardik.style.boxShadow = "2px 3px 7px black";
 })
 let Hardikbutton = document.getElementById('Hardikbutton');
 let playcard9 = document.querySelector('#playcard9');
@@ -266,10 +284,12 @@ Hardikbutton.addEventListener('dblclick', function() {
 let Chahal = document.querySelector('.playcard img#Chahal');
 Chahal.addEventListener('mouseover', function() {
     Chahal.style.transform = "scale(1.1)";
+    Chahal.style.boxShadow = "2px 3px 35px orange";
     Chahal.style.transition = "all 0.3s ease-in-out";
 });
 Chahal.addEventListener('mouseout', function() {
     Chahal.style.transform = "scale(1)";
+    Chahal.style.boxShadow = "2px 3px 7px black";
 })
 let Chahalbutton = document.getElementById('Chahalbutton');
 let playcard10 = document.querySelector('#playcard10');
@@ -293,10 +313,12 @@ Chahalbutton.addEventListener('dblclick', function() {
 let Shubman = document.querySelector('.playcard img#Gill');
 Shubman.addEventListener('mouseover', function() {
     Shubman.style.transform = "scale(1.1)";
+    Shubman.style.boxShadow = "2px 3px 35px orange";
     Shubman.style.transition = "all 0.3s ease-in-out";
 });
 Shubman.addEventListener('mouseout', function() {
     Shubman.style.transform = "scale(1)";
+    Shubman.style.boxShadow = "2px 3px 7px black";
 })
 let shubmanbutton = document.getElementById('Gillbutton');
 let playcard11 = document.querySelector('#playcard11');
@@ -316,64 +338,57 @@ shubmanbutton.addEventListener('dblclick', function() {
     shubmanbutton.innerText = "read more";
 });
 
-// ! MATCH UPDATES SECTION AND TEAM FIXTURES
+//!             Details
 
-let teams = [];
+// todo          1. virat
 
-// team registration handling
-document.getElementById("teamForm").addEventListener("submit", function(event) {
-    event.preventDefault();
+let viratdetails = [{
+  "id": 1,
+  "name": "Virat Kohli",
+  "fullName": "Virat Prem Kohli",
+  "born": "5 November 1988",
+  "age": 36,
+  "birthPlace": "Delhi, India",
+  "nationality": "Indian",
+  "role": "Top-order Batter",
+  "battingStyle": "Right-hand bat",
+  "bowlingStyle": "Right-arm medium",
+  "teams": [
+    "India",
+    "Royal Challengers Bangalore",
+    "Delhi",
+    "India U19"
+  ],
+  "odiDebut": "18 August 2008 vs Sri Lanka",
+  "testDebut": "20 June 2011 vs West Indies",
+  "t20Debut": "12 June 2010 vs Zimbabwe",
+  "jerseyNumber": 18,
+  "records": {
+    "odiRuns": 13000,
+    "testRuns": 9000,
+    "t20Runs": 4000,
+    "odiCenturies": 50,
+    "testCenturies": 29,
+    "iplRuns": 7500
+  },
+  "awards": [
+    "ICC Cricketer of the Year",
+    "Arjuna Award",
+    "Padma Shri",
+    "ICC ODI Player of the Year"
+  ],
+  "image": "https://example.com/virat-kohli.jpg"
+}]
 
-    let teamName = document.getElementById("teamName").value;
-    let captainName = document.getElementById("captainName").value;
-    let phone = document.getElementById("phone").value;
+let v_d = document.getElementById("v_d");
+console.log(v_d);
 
-    let teamData = {
-        team: teamName,
-        captain: captainName,
-        phone: phone
-    };
+viratdetails.map((e)=>{
+    let div = document.createElement("div");
 
-    teams.push(teamData);
-    showTeams();
-    generateMatches();
+    div.innerHTML=`<h1>Name : ${e.name}</h1>,<h3>FullName : ${e.fullName}
+    DOB : ${e.born}<br>Age : ${e.age}`;
 
-    // Reset Form
-    document.getElementById("teamForm").reset();
-});
-
-
-// Show Registered Teams
-function showTeams() {
-    let list = document.getElementById("teamList");
-    list.innerHTML = "";
-
-    teams.forEach((t, index) => {
-        let li = document.createElement("li");
-        li.innerText = `${index + 1}. ${t.team} (Captain: ${t.captain})`;
-        list.appendChild(li);
-    });
-}
-
-
-// Generate Match Fixtures Automatically
-function generateMatches() {
-    let matchList = document.getElementById("matchList");
-    matchList.innerHTML = "";
-
-    if (teams.length < 2) {
-        matchList.innerHTML = "<li>Need at least 2 teams to schedule a match.</li>";
-        return;
-    }
-
-    for (let i = 0; i < teams.length; i += 2) {
-        if (teams[i + 1]) {
-            let match = document.createElement("li");
-            match.innerText = `${teams[i].team} VS ${teams[i + 1].team}`;
-            matchList.appendChild(match);
-        }
-    }
-}
-// Initial call to display any existing teams
-showTeams();
-generateMatches();
+    v_d.append(div);
+    
+})

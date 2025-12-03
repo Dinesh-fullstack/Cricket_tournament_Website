@@ -37,10 +37,7 @@ body {
 .brand h1 {
   font-size: 26px;
   letter-spacing: 1px;
-  background: linear-gradient(90deg, #00eaff, #28ffb8);
-  
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: white;
 }
 
 /* ---------- Navbar ---------- */
