@@ -105,7 +105,7 @@ input[type="search"]:hover{
     /* box creating */
     height: auto;
     width:350px;
-    margin-top: 30px;
+    margin-top: 100px;
     padding: 10px;
     border: none;
     display: flex;
@@ -114,7 +114,16 @@ input[type="search"]:hover{
     align-items: center;
 
     overflow: auto;
+   transform: translateY(100px);
+   opacity: 0;
+   transition: all 1s ease-out;
 }
+
+.playcard.show{
+    transform: translateY(0);
+    opacity: 1;
+}
+
 
 ::-webkit-scrollbar{
     display: none;
