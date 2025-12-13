@@ -1,0 +1,262 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* background */
+.outer{
+    height: 100vh;
+   background:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url("https://www.shutterstock.com/image-photo/cricket-stadium-closeup-600nw-2591934731.jpg");
+   background-repeat: no-repeat;
+   background-size: cover;
+   z-index: -2;
+ 
+}
+
+.inner{
+    /* width: 40%;
+    height: 90%;border: 2px solid yellowgreen;
+    position: fixed;
+    top: 50px;
+    left: 400px;
+    background-color: aqua;
+    background: url("https://www.shutterstock.com/image-photo/cricket-stadium-closeup-600nw-2591934731.jpg");
+    background-size: cover;
+    background-position: center;
+    filter: blur(8px);     
+    z-index: 0;   */
+
+    position: fixed;
+    top: 50px;
+    left: 0px;
+    width: 40%;
+    height: 90%;
+    background: transparent;
+    border-radius: 20px;
+    border: 0.4px solid rgb(149, 131, 131);
+    backdrop-filter: blur(9px);
+
+    animation: pad 1s linear forwards;
+    opacity: 0;
+}
+
+
+@keyframes pad{
+    from{
+
+    }
+    to{
+        transform: translateX(410px);
+        opacity: 1;
+    }
+}
+.content{
+     position: relative;
+    z-index: 1;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* width: 100%; */
+    position: relative;
+    bottom: 290px;
+    color: white;
+    animation: dad 0.8s linear forwards;
+     opacity: 0;
+}
+
+@keyframes dad{
+    from{
+
+    }
+    to{
+        transform: translateY(290px);
+        opacity: 1;
+    }
+}
+form{
+    width: 40%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+.inner:hover{
+    transform: scale(1.01);
+    box-shadow: 2px 3px 35px yellowgreen;
+    transition: all 0.4s ease-in-out;
+}
+
+form > h1{
+    text-align: center;
+}
+
+/* input */
+input{
+    padding: 10px;
+    width: 80%;
+    background-color: rgba(145, 191, 54, 0.683);
+    margin-left: 45px;
+
+    border: none;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    padding-left: 40px;
+    color: aqua;
+    font-size: 15px;
+}
+#name{
+    text-transform: capitalize;
+}
+
+input:focus{
+    background-color: rgba(153, 205, 50, 0.375);
+    box-shadow: 2px 3px 10px black;
+    outline: none;
+    outline-color: blue;
+}
+input:hover{
+    
+    transform: scale(1.03);
+    transition: all 0.6s ease-in-out;
+}
+
+/* password */
+
+.input-box {
+  position: relative;
+}
+
+.input-box input {
+  padding: 12px 12px 12px 40px;
+  border-radius: 25px;
+  border: none;
+  outline: none;
+}
+
+.input-box .icon{
+  position: absolute;
+  right: 75px;
+  top: 55%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 25px;
+  z-index: 1;
+}
+
+
+/* label */
+label{
+    font-size: 18px;
+    margin-left: 50px;
+    transform: translateX(0);
+    transition: transform 1s ease-in-out;
+}
+
+/* button */
+
+.btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+
+button{
+    padding: 10px;
+
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 15px;
+    background-color: rgb(129, 82, 64);
+    width: 170px;
+    color: burlywood;
+    margin-right: 20px;
+}
+
+button:hover{
+    background-color: brown;
+    transform: scale(1.04);
+
+    box-shadow: 2px 1px 9px black;
+}
+
+button:active{
+    transform: scale(1);
+    box-shadow: 0px 0px 0px;
+}
+/* label moved */
+.move{
+    transform: translateX(150px);
+    transition: all 1s linear;
+}
+
+#name{
+    transition-delay: 0.1s;
+}
+#pass{
+    transition-delay: 0.3s;
+}
+#email{
+    transition-delay: 0.6s;
+}
+#no{
+    transition-delay: 0.8s;
+}
+#phone{
+    transition-delay: 1s;
+}
+
+
+/* footer */
+
+.footer{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 15px;
+}
+
+.out{
+    transform: translateX(-400px);
+    opacity: 0;
+    transition: all 1s linear;
+}
+
+.upout{
+    transform: translateY(-400px);
+    opacity: 0;
+    transition: all 1s linear;
+}
+
+#login{
+    text-decoration: none;
+    font-size: 20px;
+    color: beige;
+    margin-right: 50px;
+}
+#login:hover{
+    transform: scale(1.07);
+}
+#login:active{
+    transform: scale(1);
+    color: aqua;
+}
+
+/* form */
+.slide-right{
+    backdrop-filter: blur(0px);
+    border: none;
+    transition: all 3s linear;
+}
+
+
+.down{
+    transform: translateX(200px);
+    transition: all 0.7s linear;
+    opacity: 0;
+}

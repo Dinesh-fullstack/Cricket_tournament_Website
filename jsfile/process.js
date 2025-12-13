@@ -362,6 +362,7 @@ if (document.querySelector('#pointsTable') || document.querySelector('#fixturePl
     const result = {
       scoreA: parseInt(scoreA||0),
       oversA: oversA || '',
+      oversA: oversA || '',
       scoreB: parseInt(scoreB||0),
       oversB: oversB || ''
     };
