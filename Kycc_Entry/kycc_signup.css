@@ -190,6 +190,7 @@ button:active{
     transform: scale(1);
     box-shadow: 0px 0px 0px;
 }
+
 /* label moved */
 .move{
     transform: translateX(150px);
@@ -204,6 +205,7 @@ button:active{
 }
 #email{
     transition-delay: 0.6s;
+    text-transform: lowercase;
 }
 #no{
     transition-delay: 0.8s;

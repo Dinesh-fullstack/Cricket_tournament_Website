@@ -13,6 +13,7 @@ let no = document.getElementById("no");
 let phone =  document.getElementById("phone");
 
 
+// pass
 pass.addEventListener("mouseover",()=>{
     lpassword.classList.add("move");
 })
@@ -108,3 +109,41 @@ img.addEventListener("click",(e)=>{
     
 });
 
+// reset 
+
+let reset =document.querySelector("#reset");
+
+reset.addEventListener("click",()=>{
+    names.value="";
+    pass.value="";
+    email.value="";
+    no.value="";
+    phone.value="";
+    
+})
+
+// local storage 
+let form = document.querySelector("form")
+
+form.addEventListener("submit",(e)=>{
+
+    e.preventDefault()
+
+    let username = document.getElementById("name").value
+    let userpass = document.getElementById("pass").value
+    let useremail = document.getElementById("email").value
+    let jercyno = document.getElementById("no").value
+    let userphone = document.getElementById("phone").value
+
+    console.log(useremail, username , userpass,jercyno, userphone)
+
+    localStorage.setItem("signupName",username)
+    localStorage.setItem("signupPass",userpass)
+    localStorage.setItem("signupEmail",useremail)
+    localStorage.setItem("signupJercyno",jercyno)
+    localStorage.setItem("signupPhone",userphone)
+
+    alert("signup done successfully")
+
+    open("./mywebsite.html");
+})
