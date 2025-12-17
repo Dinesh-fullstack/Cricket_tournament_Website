@@ -483,3 +483,10 @@ if (document.querySelector('#adminTeams') || document.querySelector('#adminMatch
   // initial render
   renderAdminTeams(); renderAdminMatches();
 }
+
+let username =  localStorage.getItem("signupName");
+console.log(username);
+
+let dinesh = document.getElementById("user");
+
+dinesh.innerHTML=`${username}`;

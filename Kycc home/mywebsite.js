@@ -563,3 +563,13 @@ const observer = new IntersectionObserver((entries) => {
 });
 
 cards.forEach(card => observer.observe(card));
+
+// append user name:
+
+let username =  localStorage.getItem("signupName");
+console.log(username);
+
+let dinesh = document.getElementById("user");
+
+dinesh.innerHTML=`${username}`;
+

@@ -145,5 +145,5 @@ form.addEventListener("submit",(e)=>{
 
     alert("signup done successfully")
 
-    open("./mywebsite.html");
+    open("../Kycc home/mywebsite.html");
 })
