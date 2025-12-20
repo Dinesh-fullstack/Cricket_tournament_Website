@@ -1,8 +1,4 @@
-/* app.js - Shared tournament management logic
-   - localStorage keys:
-     TEAMS_KEY: 'kycc_teams_v2'
-     MATCHES_KEY: 'kycc_matches_v2'
-*/
+
 // ---------- storage keys & helpers ----------
 const TEAMS_KEY = "kycc_teams_v2";
 const MATCHES_KEY = "kycc_matches_v2";
@@ -346,34 +342,296 @@ if (document.querySelector('#pointsTable') || document.querySelector('#fixturePl
     }
   });
 
-  // Live match UI
+  // Live match UI with ball-by-ball scoring
   function openLiveMatch(matchId){
     const matches = loadMatches();
     const m = matches.find(x=>x.id===matchId);
     if (!m) return showAlert('Match not found');
-    // Build a small modal-like prompt UI (simple prompts for now)
-    const scoreA = prompt(`Enter ${m.teamA} score (runs)`, m.result ? (m.result.scoreA||'') : '');
-    if (scoreA === null) return;
-    const oversA = prompt(`Enter ${m.teamA} overs (e.g. 9.3)`, m.result ? (m.result.oversA||'') : '');
-    const scoreB = prompt(`Enter ${m.teamB} score (runs)`, m.result ? (m.result.scoreB||'') : '');
-    if (scoreB === null) return;
-    const oversB = prompt(`Enter ${m.teamB} overs (e.g. 10.0)`, m.result ? (m.result.oversB||'') : '');
-    // set result
-    const result = {
-      scoreA: parseInt(scoreA||0),
-      oversA: oversA || '',
-      oversA: oversA || '',
-      scoreB: parseInt(scoreB||0),
-      oversB: oversB || ''
+
+    // Show overs selection first
+    showOversSelection(matchId, m, matches);
+  }
+
+  function showOversSelection(matchId, m, matches){
+    const oversModal = document.querySelector('#oversSelectionModal');
+    const customOversInput = document.querySelector('#customOvers');
+    const confirmBtn = document.querySelector('#confirmOversBtn');
+    const cancelBtn = document.querySelector('#cancelOversBtn');
+    const closeBtn = document.querySelector('#closeOversModal');
+    const oversButtons = oversModal.querySelectorAll('.overs-btn');
+    
+    let selectedOvers = null;
+
+    oversButtons.forEach(btn=>{
+      btn.addEventListener('click', function(){
+        oversButtons.forEach(b=>b.classList.remove('selected'));
+        this.classList.add('selected');
+        if (this.getAttribute('data-overs') === 'Custom') {
+          customOversInput.style.display = 'block';
+          selectedOvers = null;
+        } else {
+          selectedOvers = parseInt(this.getAttribute('data-overs'));
+          customOversInput.style.display = 'none';
+        }
+      });
+    });
+
+    customOversInput.addEventListener('input', function(){
+      selectedOvers = parseInt(this.value) || null;
+    });
+
+    confirmBtn.onclick = ()=>{
+      if (!selectedOvers) {
+        selectedOvers = parseInt(customOversInput.value);
+        if (!selectedOvers || selectedOvers < 1) return showAlert('Please select or enter valid overs');
+      }
+      oversModal.style.display = 'none';
+      startTeamScoring(matchId, m, matches, selectedOvers, 'A');
     };
-    if (result.scoreA > result.scoreB) result.winner = m.teamA;
-    else if (result.scoreB > result.scoreA) result.winner = m.teamB;
-    else result.winner = 'Tie';
-    m.result = result;
-    saveMatches(matches);
-    showAlert('Result saved');
-    computePointsTable();
-    renderPlayableFixtures();
+
+    cancelBtn.onclick = closeBtn.onclick = ()=>{
+      oversModal.style.display = 'none';
+    };
+
+    oversModal.style.display = 'flex';
+    customOversInput.style.display = 'none';
+    customOversInput.value = '';
+  }
+
+  function startTeamScoring(matchId, m, matches, totalOvers, team){
+    const modal = document.querySelector('#scoringModal');
+    const ballsList = document.querySelector('#ballsList');
+    const oversHistory = document.querySelector('#oversHistory');
+    const totalRunsEl = document.querySelector('#totalRuns');
+    const oversDisplayEl = document.querySelector('#oversDisplay');
+    const wicketsEl = document.querySelector('#wickets');
+    const modalTeamNameEl = document.querySelector('#modalTeamName');
+    
+    const teamName = team === 'A' ? m.teamA : m.teamB;
+    let balls = []; // all balls
+    let totalRuns = 0;
+    let wickets = 0;
+    let overs = []; // array of overs, each over is array of balls
+
+    // Load existing data if available
+    const resultKey = team === 'A' ? 'ballsA' : 'ballsB';
+    const scoreKey = team === 'A' ? 'scoreA' : 'scoreB';
+    const wicketsKey = team === 'A' ? 'wicketsA' : 'wicketsB';
+    
+    if (m.result && m.result[resultKey]) {
+      balls = [...m.result[resultKey]];
+      totalRuns = m.result[scoreKey] || 0;
+      wickets = m.result[wicketsKey] || 0;
+      // reconstruct overs
+      let currentOver = [];
+      balls.forEach(b=>{
+        if (b.type === 'run' || b.type === 'wicket') {
+          currentOver.push(b);
+          if (currentOver.length === 6) {
+            overs.push([...currentOver]);
+            currentOver = [];
+          }
+        } else {
+          currentOver.push(b); // extras don't count as balls
+        }
+      });
+      if (currentOver.length > 0) overs.push(currentOver);
+    }
+
+    function updateDisplay(){
+      totalRunsEl.innerText = totalRuns;
+      const ballCount = balls.filter(b=>b.type==='run' || b.type==='wicket').length;
+      const currentOvers = Math.floor(ballCount / 6);
+      const ballsInOvers = ballCount % 6;
+      oversDisplayEl.innerText = `${currentOvers}.${ballsInOvers}`;
+      wicketsEl.innerText = wickets;
+
+      // render current over balls only
+      const currentOver = overs[overs.length - 1] || [];
+      ballsList.innerHTML = '';
+      if (currentOver.length === 0) {
+        ballsList.innerHTML = '<span style="color:rgba(255,255,255,0.5)">Start entering balls...</span>';
+      } else {
+        currentOver.forEach(b=>{
+          const chip = document.createElement('div');
+          chip.className = `ball-chip${b.type==='wicket'?' wicket':''}`;
+          let display = '';
+          if (b.type === 'run') display = b.runs;
+          else if (b.type === 'wicket') display = 'W';
+          else if (b.type === 'wide') display = 'Wd';
+          else if (b.type === 'noball') display = 'Nb';
+          else if (b.type === 'bye') display = 'B';
+          else if (b.type === 'legbye') display = 'Lb';
+          chip.innerText = display;
+          ballsList.appendChild(chip);
+        });
+      }
+
+      // render previous overs
+      oversHistory.innerHTML = '';
+      overs.slice(0, -1).forEach((over, idx)=>{
+        const item = document.createElement('div');
+        item.className = 'over-item collapsed';
+        let overRuns = 0;
+        over.forEach(b=>{ if (b.type === 'run' || b.type === 'wide' || b.type === 'noball' || b.type === 'bye' || b.type === 'legbye') overRuns += b.runs; });
+        item.innerHTML = `
+          <div class="over-item-header">
+            <span>Over ${idx + 1}</span>
+            <span>${overRuns} runs</span>
+          </div>
+          <div class="over-item-balls">
+            ${over.map(b=>{
+              let d = '';
+              if (b.type === 'run') d = b.runs;
+              else if (b.type === 'wicket') d = 'W';
+              else if (b.type === 'wide') d = 'Wd';
+              else if (b.type === 'noball') d = 'Nb';
+              else if (b.type === 'bye') d = 'B';
+              else if (b.type === 'legbye') d = 'Lb';
+              return d;
+            }).join(', ')}
+          </div>
+        `;
+        item.addEventListener('click', function(){
+          this.classList.toggle('collapsed');
+        });
+        oversHistory.appendChild(item);
+      });
+    }
+
+    // Button handlers
+    const ballButtons = modal.querySelectorAll('.ball-btn[data-runs]');
+    ballButtons.forEach(btn=>{
+      btn.removeEventListener('click', ballButtonClick);
+      btn.addEventListener('click', ballButtonClick);
+    });
+
+    function ballButtonClick(e){
+      const runs = parseInt(e.target.getAttribute('data-runs'));
+      balls.push({ type: 'run', runs });
+      totalRuns += runs;
+      
+      const ballCount = balls.filter(b=>b.type==='run' || b.type==='wicket').length;
+      if (ballCount % 6 === 1 && ballCount > 1) {
+        // New over started, push previous to overs array
+        overs.push([]);
+      }
+      if (overs.length === 0) overs.push([]);
+      overs[overs.length - 1].push({ type: 'run', runs });
+      
+      updateDisplay();
+    }
+
+    const extrasButtons = modal.querySelectorAll('.ball-btn.extras');
+    extrasButtons.forEach(btn=>{
+      btn.removeEventListener('click', extraButtonClick);
+      btn.addEventListener('click', extraButtonClick);
+    });
+
+    function extraButtonClick(e){
+      const type = e.target.getAttribute('data-type');
+      let runsValue = 1;
+      balls.push({ type, runs: runsValue });
+      totalRuns += runsValue;
+      if (overs.length === 0) overs.push([]);
+      overs[overs.length - 1].push({ type, runs: runsValue });
+      updateDisplay();
+    }
+
+    const wicketBtn = modal.querySelector('.ball-btn.wicket');
+    wicketBtn.removeEventListener('click', wicketButtonClick);
+    wicketBtn.addEventListener('click', wicketButtonClick);
+
+    function wicketButtonClick(e){
+      balls.push({ type: 'wicket', runs: 0 });
+      wickets++;
+      
+      const ballCount = balls.filter(b=>b.type==='run' || b.type==='wicket').length;
+      if (ballCount % 6 === 1 && ballCount > 1) {
+        overs.push([]);
+      }
+      if (overs.length === 0) overs.push([]);
+      overs[overs.length - 1].push({ type: 'wicket', runs: 0 });
+      
+      updateDisplay();
+    }
+
+    const undoBtn = document.querySelector('#undoBtn');
+    undoBtn.removeEventListener('click', undoClick);
+    undoBtn.addEventListener('click', undoClick);
+
+    function undoClick(){
+      if (!balls.length) return;
+      const last = balls.pop();
+      if (last.type === 'wicket') wickets--;
+      else totalRuns -= last.runs;
+      
+      // Also remove from current over
+      if (overs.length > 0 && overs[overs.length - 1].length > 0) {
+        overs[overs.length - 1].pop();
+        // If over is now empty and it's the last one, remove it
+        if (overs[overs.length - 1].length === 0 && overs.length > 1) {
+          overs.pop();
+        }
+      }
+      updateDisplay();
+    }
+
+    // Save handler
+    const saveBtn = document.querySelector('#saveScoringBtn');
+    saveBtn.removeEventListener('click', saveScore);
+    saveBtn.addEventListener('click', saveScore);
+
+    function saveScore(){
+      if (!m.result) m.result = {};
+      
+      const scoreKey = team === 'A' ? 'scoreA' : 'scoreB';
+      const wicketsKey = team === 'A' ? 'wicketsA' : 'wicketsB';
+      const ballsKey = team === 'A' ? 'ballsA' : 'ballsB';
+      const oversKey = team === 'A' ? 'oversA' : 'oversB';
+
+      m.result[scoreKey] = totalRuns;
+      m.result[wicketsKey] = wickets;
+      m.result[ballsKey] = balls;
+      
+      const ballCount = balls.filter(b=>b.type==='run' || b.type==='wicket').length;
+      m.result[oversKey] = Math.floor(ballCount / 6) + '.' + (ballCount % 6);
+
+      if (team === 'A') {
+        // Move to Team B
+        saveMatches(matches);
+        modal.style.display = 'none';
+        startTeamScoring(matchId, m, matches, totalOvers, 'B');
+      } else {
+        // Both teams done
+        if (m.result.scoreA > m.result.scoreB) m.result.winner = m.teamA;
+        else if (m.result.scoreB > m.result.scoreA) m.result.winner = m.teamB;
+        else m.result.winner = 'Tie';
+
+        saveMatches(matches);
+        modal.style.display = 'none';
+        showAlert('Match result saved!');
+        computePointsTable();
+        renderPlayableFixtures();
+      }
+    }
+
+    const cancelBtn = document.querySelector('#cancelScoringBtn');
+    cancelBtn.removeEventListener('click', closeModal);
+    cancelBtn.addEventListener('click', closeModal);
+
+    function closeModal(){
+      modal.style.display = 'none';
+    }
+
+    const closeBtn = document.querySelector('#closeModal');
+    closeBtn.removeEventListener('click', closeModal);
+    closeBtn.addEventListener('click', closeModal);
+
+    // Show modal
+    modalTeamNameEl.innerText = `Scoring - ${teamName}`;
+    modal.style.display = 'flex';
+    updateDisplay();
   }
 
   // wire compute button

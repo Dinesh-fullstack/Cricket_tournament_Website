@@ -81,9 +81,10 @@ login.addEventListener("click",(e)=>{
     btn[0].classList.add("down");
     btn[1].classList.add("down");
 
-    setTimeout(()=>{
-          open("./sunday_task.html");
-        },1000);
+        setTimeout(()=>{
+                    // go to login page
+                    window.location.href = './login.html';
+                },1000);
 
     footer[0].classList.add("down");
     footer[1].classList.add("down");
@@ -137,13 +138,17 @@ form.addEventListener("submit",(e)=>{
 
     console.log(useremail, username , userpass,jercyno, userphone)
 
+    // Store signup data
     localStorage.setItem("signupName",username)
     localStorage.setItem("signupPass",userpass)
     localStorage.setItem("signupEmail",useremail)
+    localStorage.setItem("userEmail",useremail) // For login system compatibility
     localStorage.setItem("signupJercyno",jercyno)
     localStorage.setItem("signupPhone",userphone)
+    localStorage.setItem("loginTime", new Date().toISOString())
 
-    alert("signup done successfully")
+    alert("signup done successfully. Please login to continue.")
 
-    open("../Kycc home/mywebsite.html");
+    // After signup, redirect to the login page so user can login
+    window.location.href = './login.html';
 })

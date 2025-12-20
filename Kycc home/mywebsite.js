@@ -564,12 +564,89 @@ const observer = new IntersectionObserver((entries) => {
 
 cards.forEach(card => observer.observe(card));
 
-// append user name:
+// Check if user is logged in
+let username = localStorage.getItem("signupName");
+let userEmail = localStorage.getItem("userEmail");
 
-let username =  localStorage.getItem("signupName");
-console.log(username);
+if (!username || !userEmail) {
+    // Redirect to login page if not logged in
+    window.location.href = '../Kycc_Entry/login.html';
+} else {
+    console.log('Logged in as:', username);
+}
 
+// Append user name and create logout button
 let dinesh = document.getElementById("user");
+dinesh.innerHTML = `<i class="fa-solid fa-user-circle"></i> ${username}`;
+dinesh.style.cursor = "pointer";
+dinesh.style.position = "relative";
 
-dinesh.innerHTML=`${username}`;
+// Create a sidebar menu that toggles logout (will appear when sidebar icon clicked)
+const sidebar = document.querySelector('.sidebar');
+if (sidebar) {
+    // Ensure sidebar has relative positioning
+    sidebar.style.position = 'relative';
+
+    // Create menu container
+    const menu = document.createElement('div');
+    menu.className = 'sidebar-menu';
+    menu.innerHTML = `
+        <div class="sidebar-user">${username}</div>
+        <button class="logout-btn">Logout</button>
+    `;
+    menu.style.display = 'none';
+    sidebar.appendChild(menu);
+
+    // Toggle menu when sidebar icon clicked
+    sidebar.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (menu.style.display === 'none') menu.style.display = 'block';
+        else menu.style.display = 'none';
+    });
+
+    // Logout handler inside menu
+    const logoutBtn = menu.querySelector('.logout-btn');
+    logoutBtn.addEventListener('click', function (ev) {
+        ev.stopPropagation();
+        // Clear login data
+        localStorage.removeItem('signupName');
+        localStorage.removeItem('userEmail');
+        localStorage.removeItem('loginTime');
+        // Redirect to login
+        window.location.href = '../Kycc_Entry/login.html';
+    });
+
+    // Clicking outside closes the menu
+    document.addEventListener('click', function () {
+        menu.style.display = 'none';
+    });
+}
+
+// Add tooltip on hover
+dinesh.addEventListener('mouseover', function () {
+    this.title = 'Profile';
+});
+
+// Session timeout (optional - logout after 30 minutes of inactivity)
+let inactivityTimer;
+const INACTIVITY_LIMIT = 30 * 60 * 1000; // 30 minutes
+
+function resetInactivityTimer() {
+    clearTimeout(inactivityTimer);
+    inactivityTimer = setTimeout(() => {
+        alert('Your session has expired due to inactivity. Please login again.');
+        localStorage.removeItem('signupName');
+        localStorage.removeItem('userEmail');
+        localStorage.removeItem('loginTime');
+        window.location.href = '../Kycc_Entry/login.html';
+    }, INACTIVITY_LIMIT);
+}
+
+// Set up inactivity timer on user interactions
+document.addEventListener('mousemove', resetInactivityTimer);
+document.addEventListener('keypress', resetInactivityTimer);
+document.addEventListener('click', resetInactivityTimer);
+
+// Initialize inactivity timer
+resetInactivityTimer();
 

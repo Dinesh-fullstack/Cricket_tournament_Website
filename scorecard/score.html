@@ -30,7 +30,80 @@
     <div class="card">
       <h2>Play / Update Match Results</h2>
       <ul id="fixturePlayList" class="list"></ul>
-      <div style="margin-top:10px;color:var(--muted);font-size:13px">Click <strong>Play</strong> to open a small prompt to enter scores (quick method).</div>
+      <div style="margin-top:10px;color:var(--muted);font-size:13px">Click <strong>Play</strong> to enter ball-by-ball scores.</div>
+    </div>
+  </div>
+
+  <!-- Overs Selection Modal -->
+  <div id="oversSelectionModal" class="modal" style="display:none">
+    <div class="modal-content" style="max-width:400px">
+      <div class="modal-header">
+        <h3>Select Total Overs</h3>
+        <button class="close-btn" id="closeOversModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="color:rgba(255,255,255,0.8);margin-bottom:20px;font-size:14px">How many overs for this match?</p>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+          <button class="overs-btn" data-overs="5">5</button>
+          <button class="overs-btn" data-overs="10">10</button>
+          <button class="overs-btn" data-overs="15">15</button>
+          <button class="overs-btn" data-overs="20">20</button>
+          <button class="overs-btn" data-overs="50">50</button>
+          <button class="overs-btn" data-overs="Custom">Custom</button>
+        </div>
+        <input type="number" id="customOvers" placeholder="Enter overs" style="width:100%;padding:10px;margin-top:15px;border-radius:8px;border:1px solid rgba(0,255,255,0.2);background:rgba(255,255,255,0.02);color:#fff" min="1" max="100"/>
+      </div>
+      <div class="modal-footer">
+        <button id="confirmOversBtn" class="btn">Start Scoring</button>
+        <button id="cancelOversBtn" class="btn-alt">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ball-by-Ball Scoring Modal -->
+  <div id="scoringModal" class="modal" style="display:none">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTeamName">Team Scoring</h3>
+        <button class="close-btn" id="closeModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="score-display">
+          <div class="stat"><span>Runs:</span><span id="totalRuns">0</span></div>
+          <div class="stat"><span>Overs:</span><span id="oversDisplay">0.0</span></div>
+          <div class="stat"><span>Wickets:</span><span id="wickets">0</span></div>
+        </div>
+
+        <div class="overs-history" id="oversHistory" style="margin-bottom:20px;max-height:200px;overflow-y:auto"></div>
+        
+        <div class="current-over">
+          <h4 style="margin-bottom:10px;color:rgba(0,255,255,0.9)">Current Over</h4>
+          <div class="balls-log" style="background:rgba(0,255,255,0.05);padding:12px;border-radius:8px">
+            <div id="ballsList" style="display:flex;flex-wrap:wrap;gap:8px;min-height:40px;align-items:center"></div>
+          </div>
+        </div>
+        
+        <div class="ball-buttons">
+          <button class="ball-btn" data-runs="0">Dot</button>
+          <button class="ball-btn" data-runs="1">1</button>
+          <button class="ball-btn" data-runs="2">2</button>
+          <button class="ball-btn" data-runs="3">3</button>
+          <button class="ball-btn" data-runs="4">4</button>
+          <button class="ball-btn" data-runs="5">5</button>
+          <button class="ball-btn" data-runs="6">6</button>
+          <button class="ball-btn extras" data-type="wide">Wide</button>
+          <button class="ball-btn extras" data-type="noball">No Ball</button>
+          <button class="ball-btn extras" data-type="bye">Bye</button>
+          <button class="ball-btn extras" data-type="legbye">Leg Bye</button>
+          <button class="ball-btn wicket" data-type="wicket">Wicket</button>
+          <button class="ball-btn undo" id="undoBtn">↶ Undo</button>
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button id="saveScoringBtn" class="btn">Next Team / Save</button>
+        <button id="cancelScoringBtn" class="btn-alt">Cancel</button>
+      </div>
     </div>
   </div>
   <script src="../jsfile/process.js"></script>

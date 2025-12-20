@@ -1,0 +1,38 @@
+/* Modern signup page design (new file) */
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--accent:#ff7a59;--muted:#94a3b8}
+body{font-family:Segoe UI, Tahoma, Geneva, Verdana, sans-serif;background:linear-gradient(180deg,#061028 0%,#0f2336 70%);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px;color:#eaf3ff}
+.outer{width:100%;max-width:1000px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:14px;display:flex;gap:28px;padding:26px;box-shadow:0 12px 40px rgba(2,6,23,0.6)}
+/* hero */
+.inner{flex:1;padding:28px;border-radius:10px;display:flex;flex-direction:column;justify-content:center;gap:12px;background:linear-gradient(180deg, rgba(255,122,89,0.04), transparent)}
+.inner h2{font-size:32px;color:#fff;margin-bottom:4px}
+.inner p{color:rgba(234,243,255,0.85);line-height:1.5}
+/* form */
+.content{flex:1.1;display:flex;align-items:center;justify-content:center}
+form{width:100%;max-width:460px;padding:24px;border-radius:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);backdrop-filter:blur(6px)}
+form h1{color:#fff;font-size:22px;margin-bottom:6px}
+form p.lead{color:var(--muted);font-size:13px;margin-bottom:12px}
+label{display:block;font-size:13px;color:rgba(234,243,255,0.9);margin-bottom:6px}
+input[type=text],input[type=password],input[type=email],input[type=tel],input[type=number]{width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.01);color:#eaf3ff;font-size:14px;transition:all .15s ease}
+input::placeholder{color:rgba(234,243,255,0.38)}
+input:focus{outline:none;box-shadow:0 10px 30px rgba(7,18,36,0.6);border-color:rgba(255,122,89,0.45)}
+.input-box{position:relative}
+.input-box .icon{position:absolute;right:12px;top:50%;transform:translateY(-50%);width:22px;opacity:.95}
+/* actions */
+.btn{display:flex;justify-content:space-between;align-items:center;margin-top:16px;gap:12px}
+#submit{background:linear-gradient(90deg,var(--accent),#ffb48a);color:#081029;border:none;padding:10px 18px;border-radius:10px;font-weight:800;cursor:pointer}
+#reset{background:transparent;border:1px solid rgba(255,255,255,0.04);color:rgba(234,243,255,0.9);padding:10px 14px;border-radius:10px;cursor:pointer}
+#submit:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(255,122,89,0.14)}
+#reset:hover{background:rgba(255,255,255,0.02)}
+.footer{display:flex;justify-content:space-between;align-items:center;margin-top:16px}
+.footer p{color:rgba(234,243,255,0.7);font-size:13px}
+#login{color:var(--accent);font-weight:700;text-decoration:none}
+#login:hover{text-decoration:underline}
+/* small helpers (for your JS) */
+.move{transform:translateX(18px);transition:all .5s ease}
+.out{transform:translateX(-40px);opacity:0;transition:all .6s ease}
+.upout{transform:translateY(-40px);opacity:0;transition:all .6s ease}
+.down{transform:translateX(18px);opacity:0;transition:all .6s ease}
+.slide-right{backdrop-filter:blur(0)}
+/* responsive */
+@media(max-width:900px){.outer{flex-direction:column}.inner{order:2}.content{order:1}form{padding:18px}}
