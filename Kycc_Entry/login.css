@@ -64,11 +64,13 @@
     }
 }
 form{
-    width: 40%;
+    width: 100%;
+    max-width: 450px;
     height: 80%;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 15px;
+    align-items: center;
 }
 
 
@@ -84,64 +86,98 @@ form > h1{
 
 /* input */
 input{
-    padding: 10px;
-    width: 80%;
-    background-color: rgba(145, 191, 54, 0.683);
-    margin-left: 45px;
-
-    border: none;
-    border-radius: 20px;
-    margin-bottom: 15px;
-    padding-left: 40px;
+    padding: 14px 18px;
+    width: 100%;
+    max-width: 350px;
+    background-color: rgba(20, 203, 44, 0.455);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
     color: aqua;
     font-size: 15px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    opacity: 0.5;
 }
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
 #name{
     text-transform: capitalize;
 }
 
 input:focus{
-    background-color: rgba(153, 205, 50, 0.375);
-    box-shadow: 2px 3px 10px black;
+    background-color: rgba(255, 255, 255, 0.25);
+    border-color: rgba(144, 238, 144, 0.8);
+    box-shadow: 0 0 15px rgba(144, 238, 144, 0.4);
     outline: none;
-    outline-color: blue;
 }
+
 input:hover{
-    
-    transform: scale(1.03);
-    transition: all 0.6s ease-in-out;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
 }
+
 
 /* password */
 
 .input-box {
   position: relative;
+  width: 100%;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .input-box input {
-  padding: 12px 12px 12px 40px;
-  border-radius: 25px;
-  border: none;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
   outline: none;
+  width: 100%;
+   background-color: rgba(20, 203, 44, 0.455);
+  backdrop-filter: blur(10px);
+  color: aqua;
+  font-size: 15px;
+  transition: all 0.3s ease;
 }
 
-.input-box .icon{
-  position: absolute;
-  right: 75px;
-  top: 55%;
-  transform: translateY(-50%);
-  width: 30px;
-  height: 25px;
-  z-index: 1;
+.input-box input:focus {
+  background-color: rgba(255, 255, 255, 0.25);
+  border-color: rgba(144, 238, 144, 0.8);
+  box-shadow: 0 0 15px rgba(144, 238, 144, 0.4);
 }
 
-
+.input-box input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+/* ! icon  */
+.icon{
+    width: 30px;
+    height: 26px;
+    position: absolute;
+    top: 38px;
+   right: 10px;
+    opacity: 1;
+    z-index: 2;
+}
+.icon:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
 /* label */
 label{
-    font-size: 18px;
-    margin-left: 50px;
+    font-size: 16px;
+    margin-left: 0;
     transform: translateX(0);
     transition: transform 1s ease-in-out;
+    width: 100%;
+    max-width: 350px;
+    padding-left: 10px;
+    text-transform: capitalize;
 }
 
 /* button */
@@ -155,16 +191,16 @@ label{
 
 
 button{
-    padding: 10px;
-
+    padding: 12px 30px;
     border: none;
     border-radius: 20px;
     font-weight: bold;
     font-size: 15px;
     background-color: rgb(129, 82, 64);
-    width: 170px;
+    width: auto;
+    min-width: 150px;
     color: burlywood;
-    margin-right: 20px;
+    margin: 10px 0;
 }
 
 button:hover{
@@ -198,8 +234,11 @@ button:active{
 
 .footer{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+    gap: 100px;
     margin-top: 15px;
+    width: 100%;
+    max-width: 350px;
 }
 
 .out{
@@ -216,9 +255,9 @@ button:active{
 
 #signup{
     text-decoration: none;
-    font-size: 20px;
+    font-size: 16px;
     color: beige;
-    margin-right: 50px;
+    margin: 0;
 }
 #signup:hover{
     transform: scale(1.07);
@@ -240,4 +279,51 @@ button:active{
     transform: translateX(200px);
     transition: all 0.7s linear;
     opacity: 0;
+}
+
+/* message box */
+.message-box {
+    width: 100%;
+    max-width: 350px;
+    text-align: center;
+    height: 30px;
+}
+
+.error-message, .success-message {
+    font-size: 14px;
+    padding: 8px;
+    border-radius: 8px;
+    display: none;
+    width: 100%;
+}
+
+.error-message.show {
+    display: block;
+    background-color: rgba(255, 0, 0, 0.3);
+    color: #ff6b6b;
+}
+
+.success-message.show {
+    display: block;
+    background-color: rgba(0, 255, 0, 0.3);
+    color: #51cf66;
+}
+
+/* remember box */
+.remember-box {
+    width: 100%;
+    max-width: 350px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+}
+
+.remember-box input[type="checkbox"] {
+    width: auto;
+    max-width: none;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    cursor: pointer;
 }

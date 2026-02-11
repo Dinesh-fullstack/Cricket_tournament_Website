@@ -3,30 +3,24 @@
 const loginForm = document.getElementById('loginForm');
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
-const togglePassword = document.getElementById('togglePassword');
 const errorMessage = document.getElementById('errorMessage');
 const successMessage = document.getElementById('successMessage');
 const rememberCheckbox = document.getElementById('remember');
 
-// Toggle password visibility
-togglePassword.addEventListener('click', function () {
-    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-    passwordInput.setAttribute('type', type);
-    
-    // Toggle icon
-    if (type === 'password') {
-        this.innerHTML = '<i class="fa-solid fa-eye"></i>';
-    } else {
-        this.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
-    }
-});
+// Demo users for testing
+const demoUsers = [
+    { email: 'admin@kycc.com', password: 'admin123', name: 'Admin User' },
+    { email: 'user@kycc.com', password: 'user123', name: 'Test User' }
+];
 
 // Load remembered email
 window.addEventListener('load', function () {
     const rememberedEmail = localStorage.getItem('rememberedEmail');
-    if (rememberedEmail) {
+    if (rememberedEmail && emailInput) {
         emailInput.value = rememberedEmail;
-        rememberCheckbox.checked = true;
+        if (rememberCheckbox) {
+            rememberCheckbox.checked = true;
+        }
     }
 });
 
@@ -88,7 +82,7 @@ function simulateLogin(email, password) {
             localStorage.setItem('loginTime', new Date().toISOString());
 
             // Remember email if checkbox is checked
-            if (rememberCheckbox.checked) {
+            if (rememberCheckbox && rememberCheckbox.checked) {
                 localStorage.setItem('rememberedEmail', email);
             } else {
                 localStorage.removeItem('rememberedEmail');
@@ -116,12 +110,33 @@ function simulateLogin(email, password) {
 }
 
 function showError(message) {
-    errorMessage.innerText = '❌ ' + message;
-    errorMessage.classList.add('show');
+    if (errorMessage) {
+        errorMessage.innerText = '❌ ' + message;
+        errorMessage.classList.add('show');
+    }
 }
 
 function showSuccess(message) {
-    successMessage.innerText = '✓ ' + message;
-    successMessage.classList.add('show');
+    if (successMessage) {
+        successMessage.innerText = '✓ ' + message;
+        successMessage.classList.add('show');
+    }
 }
 
+// password
+
+
+let img= document.querySelector(".icon");
+
+img.addEventListener("click",(e)=>{
+    if (passwordInput.type == "password") {
+        passwordInput.type="text";
+        img.src = "https://cdn-icons-png.flaticon.com/128/535/535193.png";
+        
+    }else{
+        passwordInput.type="password";
+        img.src = "https://cdn-icons-png.flaticon.com/128/10812/10812267.png";
+    }
+
+    
+});
